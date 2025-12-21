@@ -1,6 +1,6 @@
 // assets/js/attendance.js
 
-// Fetch helper
+// Simple fetch helper
 async function fetchJSON(url) {
   const res = await fetch(url);
   return await res.json();
@@ -82,16 +82,4 @@ window.POG_PAGE = {
         const key = th.dataset.key;
         let ascending = true;
 
-        if (this.currentSort.key === key) {
-          ascending = !this.currentSort.ascending;
-        }
-
-        this.players = sortByKey(this.players, key, ascending);
-        this.currentSort = { key, ascending };
-        this.renderTable(this.players);
-      });
-    });
-  }
-};
-
-window.addEventListener('DOMContentLoaded', () => window.POG_PAGE.init());
+        if (this.cu
