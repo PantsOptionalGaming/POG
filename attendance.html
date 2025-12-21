@@ -1,63 +1,106 @@
-// assets/js/attendance.js
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>POG Attendance</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <script type="module" src="assets/js/loader.js"></script>
+  <script defer src="assets/js/attendance.js"></script>
 
-// Simple fetch helper
-async function fetchJSON(url) {
-  const res = await fetch(url);
-  return await res.json();
-}
-
-window.POG_PAGE = {
-  async init() {
-    const url = 'https://script.google.com/macros/s/AKfycbzhZFL9S3ubFnsOsI1gHFDJ5A_l9bzGmOVHV-RM_NomsOFbOig81WDeGVjkTpZtQGMk8A/exec'; 
-    console.log("Fetching attendance data from:", url);
-
-    let data;
-    try {
-      data = await fetchJSON(url);
-    } catch (err) {
-      console.error("Failed to fetch data:", err);
-      return;
+  <style>
+    /* POG Table Styling */
+    #attendance-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-family: "Inter", sans-serif;
+      table-layout: fixed;
     }
 
-    if (!data || !data.players) {
-      console.warn("No players data returned");
-      return;
+    #attendance-table th, #attendance-table td {
+      padding: 0.5rem;
+      border: 1px solid #444;
+      text-align: center;
+      word-wrap: break-word;
     }
 
-    console.log("Players received:", data.players.length);
-
-    const tbody = document.querySelector('#attendance-table tbody');
-    if (!tbody) {
-      console.error("Attendance table tbody not found!");
-      return;
+    #attendance-table thead th {
+      background-color: #984B43; /* Rust Red */
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 2;
     }
 
-    // Populate table
-    tbody.innerHTML = data.players.map(p => `
-      <tr>
-        <td>${p.account}</td>
-        <td>${p.status}</td>
-        <td>${p.totalXP}</td>
-        <td>${p.attendancePct.toFixed(1)}%</td>
-        <td>${p.streak}</td>
-        <td>${p.misses}</td>
-        <td>${p.lastRaid}</td>
-      </tr>
-    `).join('');
+    #attendance-table tbody tr:nth-child(even) {
+      background-color: #233237; /* GunMetal DarkGreen */
+    }
 
-    // Search functionality
-    const search = document.getElementById('search');
-    search.addEventListener('input', e => {
-      const val = e.target.value.toLowerCase();
-      tbody.querySelectorAll('tr').forEach(tr => {
-        const account = tr.children[0].textContent.toLowerCase();
-        tr.style.display = account.includes(val) ? '' : 'none';
-      });
-    });
+    #attendance-table tbody tr:nth-child(odd) {
+      background-color: #18121E; /* Dark Blue */
+    }
 
-    console.log("Attendance table populated!");
-  }
-};
+    #search {
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      padding: 0.5rem;
+      width: 100%;
+      max-width: 300px;
+      background: #18121E;
+      color: #fff;
+      border: 1px solid #444;
+      border-radius: 4px;
+    }
 
-// Run init when page is loaded
-window.addEventListener('DOMContentLoaded', () => window.POG_PAGE.init());
+    @media (max-width: 600px) {
+      #attendance-table th, #attendance-table td {
+        padding: 0.3rem;
+        font-size: 0.85rem;
+      }
+      #search {
+        width: 100%;
+        font-size: 0.9rem;
+      }
+    }
+
+    th.sortable:hover {
+      cursor: pointer;
+      background-color: #FF533D; /* Highlight on hover */
+    }
+  </style>
+</head>
+<body>
+  <div id="nav-container"></div>
+
+  <main class="container">
+    <h1>Attendance</h1>
+
+    <input type="text" id="search" placeholder="Search by account name..." />
+
+    <table id="attendance-table">
+      <thead>
+        <tr>
+          <th class="sortable" data-key="account">Account</th>
+          <th class="sortable" data-key="rank">Rank</th>
+          <th class="sortable" data-key="totalXP">Total XP</th>
+          <th class="sortable" data-key="quarterXP">XP This Quarter</th>
+          <th class="sortable" data-key="attendancePct">Attendance %</th>
+          <th class="sortable" data-key="streak">Current Streak</th>
+          <th class="sortable" data-key="misses">Consecutive Misses</th>
+          <th class="sortable" data-key="lastRaid">Last Raid</th>
+          <th class="sortable" data-key="status">Status</th>
+          <th class="sortable" data-key="inactive">Inactivity Warning</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- JS will populate here -->
+      </tbody>
+    </table>
+  </main>
+
+  <div id="footer-container"></div>
+</body>
+</html>
