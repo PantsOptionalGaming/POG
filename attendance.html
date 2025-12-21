@@ -7,8 +7,6 @@
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/layout.css">
   <link rel="stylesheet" href="assets/css/theme.css">
-  <script type="module" src="assets/js/loader.js"></script>
-  <script defer src="assets/js/attendance.js"></script>
 
   <style>
     /* Attendance Table Styling */
@@ -18,10 +16,11 @@
       margin-top: 1rem;
       font-family: "Inter", sans-serif;
       table-layout: fixed;
+      font-size: 0.7rem; /* reduced font ~30% */
     }
 
     #attendance-table th, #attendance-table td {
-      padding: 0.5rem;
+      padding: 0.3rem 0.5rem;
       border: 1px solid #444;
       text-align: center;
       word-wrap: break-word;
@@ -57,12 +56,11 @@
 
     @media (max-width: 600px) {
       #attendance-table th, #attendance-table td {
-        padding: 0.3rem;
-        font-size: 0.85rem;
+        padding: 0.2rem 0.3rem;
       }
       #search {
         width: 100%;
-        font-size: 0.9rem;
+        font-size: 0.8rem;
       }
     }
 
@@ -102,5 +100,8 @@
   </main>
 
   <div id="footer-container"></div>
+
+  <!-- Attendance JS -->
+  <script defer src="assets/js/attendance.js"></script>
 </body>
 </html>
