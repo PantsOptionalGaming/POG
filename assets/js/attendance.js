@@ -61,3 +61,4 @@ window.POG_PAGE = {
 
 // Run init when page is loaded
 window.addEventListener('DOMContentLoaded', () => window.POG_PAGE.init());
+
