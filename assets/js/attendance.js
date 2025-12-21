@@ -53,12 +53,15 @@ window.POG_PAGE = {
     this.tbody.innerHTML = players.map(p => `
       <tr>
         <td>${p.account}</td>
-        <td>${p.status}</td>
+        <td>${p.rank}</td>
         <td>${p.totalXP}</td>
-        <td>${p.attendancePct.toFixed(1)}%</td>
+        <td>${p.quarterXP}</td>
+        <td>${p.attendancePct.toFixed(2)}%</td>
         <td>${p.streak}</td>
         <td>${p.misses}</td>
         <td>${p.lastRaid}</td>
+        <td>${p.status}</td>
+        <td>${p.inactive ? "⚠️ INACTIVE" : ""}</td>
       </tr>
     `).join('');
   },
