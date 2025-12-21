@@ -10,9 +10,13 @@
 
   <style>
     body {
-      background-color: #18121E; /* Dark Blue */
-      color: #fff; /* Off-white text */
+      background-color: #18121E; /* Dark Blue base */
+      color: #FFFFFF; /* Default text white */
       font-family: "Inter", sans-serif;
+    }
+
+    main h1 {
+      color: #FFFFFF; /* Attendance title white */
     }
 
     /* Attendance Table Styling */
@@ -22,7 +26,7 @@
       margin-top: 1rem;
       font-size: 0.7rem; /* reduced font ~30% */
       table-layout: fixed;
-      color: #fff;
+      color: #FFFFFF;
     }
 
     #attendance-table th, #attendance-table td {
@@ -30,12 +34,12 @@
       border: 1px solid #444;
       text-align: center;
       word-wrap: break-word;
-      color: #fff; /* text color */
+      color: #FFFFFF; /* table text white */
     }
 
     #attendance-table thead th {
-      background-color: #984B43; /* Rust Red */
-      color: #fff;
+      background-color: #984B43; /* Rust Red header */
+      color: #FF533D; /* Off-white text highlight */
       position: sticky;
       top: 0;
       z-index: 2;
@@ -55,8 +59,8 @@
       padding: 0.5rem;
       width: 100%;
       max-width: 300px;
-      background: #233237;
-      color: #fff;
+      background: #233237; /* GunMetal input */
+      color: #FFFFFF; /* input text white */
       border: 1px solid #444;
       border-radius: 4px;
     }
@@ -73,7 +77,7 @@
 
     th.sortable:hover {
       cursor: pointer;
-      background-color: #FF533D; /* Hover highlight */
+      background-color: #FF533D; /* Hover highlight off-white */
     }
   </style>
 </head>
@@ -108,7 +112,6 @@
 
   <div id="footer-container"></div>
 
-  <!-- Attendance JS -->
   <script defer src="assets/js/attendance.js"></script>
 </body>
 </html>
