@@ -82,4 +82,17 @@ window.POG_PAGE = {
         const key = th.dataset.key;
         let ascending = true;
 
-        if (this.cu
+        if (this.currentSort.key === key) {
+          ascending = !this.currentSort.ascending;
+        }
+
+        this.players = sortByKey(this.players, key, ascending);
+        this.currentSort = { key, ascending };
+        this.renderTable(this.players);
+      });
+    });
+  }
+};
+
+// Run init when page is loaded
+window.addEventListener('DOMContentLoaded', () => window.POG_PAGE.init());
