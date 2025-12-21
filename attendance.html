@@ -7,118 +7,37 @@
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/layout.css">
   <link rel="stylesheet" href="assets/css/theme.css">
-
-  <!-- Loader handles nav, footer, and theme -->
-  <script type="module" src="assets/js/attendance.js"></script>
-
-  <style>
-    /* Attendance-specific styles */
-    #attendance-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
-    }
-
-    #attendance-table th, #attendance-table td {
-      padding: 0.5rem 0.75rem;
-      border: 1px solid var(--highlight-secondary);
-      text-align: left;
-    }
-
-    #attendance-table th {
-      background-color: var(--highlight-primary);
-      color: var(--text-main);
-    }
-
-    #attendance-table tbody tr:nth-child(even) {
-      background-color: rgba(255, 255, 255, 0.05);
-    }
-
-    #search {
-      margin-top: 1rem;
-      padding: 0.5rem;
-      width: 100%;
-      max-width: 400px;
-      border-radius: 4px;
-      border: 1px solid var(--highlight-secondary);
-      background-color: var(--bg-accent);
-      color: var(--text-main);
-    }
-
-    #search::placeholder {
-      color: var(--text-main);
-      opacity: 0.7;
-    }
-
-    /* Table container scroll */
-    .table-container {
-      overflow-x: auto;
-      margin-top: 1rem;
-    }
-  </style>
+  <!-- Loader for nav, footer, theme -->
+  <script type="module" src="assets/js/loader.js"></script>
+  <!-- Attendance JS -->
+  <script defer src="assets/js/attendance.js"></script>
 </head>
 <body>
   <div id="nav-container"></div>
 
   <main class="container">
     <h1>Attendance</h1>
-    <input type="text" id="search" placeholder="Search account name...">
 
-    <div class="table-container">
-      <table id="attendance-table">
-        <thead>
-          <tr>
-            <th>Account</th>
-            <th>Status</th>
-            <th>Total XP</th>
-            <th>Attendance %</th>
-            <th>Streak</th>
-            <th>Misses</th>
-            <th>Last Raid</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
+    <input type="text" id="search" placeholder="Search by account name..." />
+
+    <table id="attendance-table">
+      <thead>
+        <tr>
+          <th>Account</th>
+          <th>Status</th>
+          <th>Total XP</th>
+          <th>Attendance %</th>
+          <th>Streak</th>
+          <th>Misses</th>
+          <th>Last Raid</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- JS will populate here -->
+      </tbody>
+    </table>
   </main>
 
   <div id="footer-container"></div>
-
-  <!-- Attendance page logic -->
-  <script type="module">
-    import { fetchJSON } from './assets/js/sheets.js';
-
-    window.POG_PAGE = {
-      async init() {
-        const url = 'https://script.google.com/macros/s/AKfycbzhZFL9S3ubFnsOsI1gHFDJ5A_l9bzGmOVHV-RM_NomsOFbOig81WDeGVjkTpZtQGMk8A/exec'; // << Replace this with your published URL
-        const data = await fetchJSON(url);
-        if (!data || !data.players) return;
-
-        const tbody = document.querySelector('#attendance-table tbody');
-
-        tbody.innerHTML = data.players.map(p => `
-          <tr>
-            <td>${p.account}</td>
-            <td>${p.status}</td>
-            <td>${p.totalXP}</td>
-            <td>${p.attendancePct.toFixed(1)}%</td>
-            <td>${p.streak}</td>
-            <td>${p.misses}</td>
-            <td>${p.lastRaid}</td>
-          </tr>
-        `).join('');
-
-        // Search functionality
-        const search = document.getElementById('search');
-        search.addEventListener('input', e => {
-          const val = e.target.value.toLowerCase();
-          tbody.querySelectorAll('tr').forEach(tr => {
-            const account = tr.children[0].textContent.toLowerCase();
-            tr.style.display = account.includes(val) ? '' : 'none';
-          });
-        });
-      }
-    };
-  </script>
 </body>
 </html>
