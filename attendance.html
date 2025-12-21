@@ -8,9 +8,42 @@
   <link rel="stylesheet" href="assets/css/layout.css">
   <link rel="stylesheet" href="assets/css/theme.css">
   <!-- Loader for nav, footer, theme -->
-  <script type="module" src="assets/js/attendance.js"></script>
+  <script type="module" src="assets/js/loader.js"></script>
   <!-- Attendance JS -->
   <script defer src="assets/js/attendance.js"></script>
+  <style>
+    /* Quick POG formatting */
+    #attendance-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-family: "Inter", sans-serif;
+    }
+    #attendance-table th, #attendance-table td {
+      padding: 0.5rem;
+      border: 1px solid #444;
+      text-align: center;
+    }
+    #attendance-table tbody tr:nth-child(even) {
+      background-color: #233237; /* GunMetal DarkGreen */
+    }
+    #attendance-table tbody tr:nth-child(odd) {
+      background-color: #18121E; /* Dark Blue */
+    }
+    #attendance-table th {
+      background-color: #984B43; /* Rust Red */
+      color: #fff;
+    }
+    #search {
+      margin-top: 1rem;
+      padding: 0.5rem;
+      width: 100%;
+      max-width: 300px;
+      background: #18121E;
+      color: #fff;
+      border: 1px solid #444;
+    }
+  </style>
 </head>
 <body>
   <div id="nav-container"></div>
