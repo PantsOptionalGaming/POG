@@ -1,0 +1,5 @@
+.container{max-width:1200px;margin:auto;padding:1rem}
+.nav{position:sticky;top:0;display:flex;justify-content:space-between;padding:1rem;background:var(--bg-accent)}
+.nav-links a{margin-right:1rem;color:var(--text-main);text-decoration:none}
+.nav-links a.active{color:var(--highlight-tertiary)}
+.footer{text-align:center;padding:1rem;opacity:.7}
