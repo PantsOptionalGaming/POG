@@ -1,76 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>POG Attendance</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="assets/css/base.css">
-  <link rel="stylesheet" href="assets/css/layout.css">
-  <link rel="stylesheet" href="assets/css/theme.css">
-  <!-- Loader for nav, footer, theme -->
-  <script type="module" src="assets/js/loader.js"></script>
-  <!-- Attendance JS -->
-  <script defer src="assets/js/attendance.js"></script>
-  <style>
-    /* Quick POG formatting */
-    #attendance-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
-      font-family: "Inter", sans-serif;
-    }
-    #attendance-table th, #attendance-table td {
-      padding: 0.5rem;
-      border: 1px solid #444;
-      text-align: center;
-    }
-    #attendance-table tbody tr:nth-child(even) {
-      background-color: #233237; /* GunMetal DarkGreen */
-    }
-    #attendance-table tbody tr:nth-child(odd) {
-      background-color: #18121E; /* Dark Blue */
-    }
-    #attendance-table th {
-      background-color: #984B43; /* Rust Red */
-      color: #fff;
-    }
-    #search {
-      margin-top: 1rem;
-      padding: 0.5rem;
-      width: 100%;
-      max-width: 300px;
-      background: #18121E;
-      color: #fff;
-      border: 1px solid #444;
-    }
-  </style>
-</head>
-<body>
-  <div id="nav-container"></div>
+// assets/js/attendance.js
 
-  <main class="container">
-    <h1>Attendance</h1>
+// Simple fetch helper
+async function fetchJSON(url) {
+  const res = await fetch(url);
+  return await res.json();
+}
 
-    <input type="text" id="search" placeholder="Search by account name..." />
+window.POG_PAGE = {
+  async init() {
+    const url = 'https://script.google.com/macros/s/AKfycbzhZFL9S3ubFnsOsI1gHFDJ5A_l9bzGmOVHV-RM_NomsOFbOig81WDeGVjkTpZtQGMk8A/exec'; 
+    console.log("Fetching attendance data from:", url);
 
-    <table id="attendance-table">
-      <thead>
-        <tr>
-          <th>Account</th>
-          <th>Status</th>
-          <th>Total XP</th>
-          <th>Attendance %</th>
-          <th>Streak</th>
-          <th>Misses</th>
-          <th>Last Raid</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- JS will populate here -->
-      </tbody>
-    </table>
-  </main>
+    let data;
+    try {
+      data = await fetchJSON(url);
+    } catch (err) {
+      console.error("Failed to fetch data:", err);
+      return;
+    }
 
-  <div id="footer-container"></div>
-</body>
-</html>
+    if (!data || !data.players) {
+      console.warn("No players data returned");
+      return;
+    }
+
+    console.log("Players received:", data.players.length);
+
+    const tbody = document.querySelector('#attendance-table tbody');
+    if (!tbody) {
+      console.error("Attendance table tbody not found!");
+      return;
+    }
+
+    // Populate table
+    tbody.innerHTML = data.players.map(p => `
+      <tr>
+        <td>${p.account}</td>
+        <td>${p.status}</td>
+        <td>${p.totalXP}</td>
+        <td>${p.attendancePct.toFixed(1)}%</td>
+        <td>${p.streak}</td>
+        <td>${p.misses}</td>
+        <td>${p.lastRaid}</td>
+      </tr>
+    `).join('');
+
+    // Search functionality
+    const search = document.getElementById('search');
+    search.addEventListener('input', e => {
+      const val = e.target.value.toLowerCase();
+      tbody.querySelectorAll('tr').forEach(tr => {
+        const account = tr.children[0].textContent.toLowerCase();
+        tr.style.display = account.includes(val) ? '' : 'none';
+      });
+    });
+
+    console.log("Attendance table populated!");
+  }
+};
+
+// Run init when page is loaded
+window.addEventListener('DOMContentLoaded', () => window.POG_PAGE.init());
