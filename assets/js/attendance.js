@@ -2,7 +2,7 @@ import { fetchJSON } from './sheets.js';
 
 window.POG_PAGE = {
   async init() {
-    const url = 'PASTE_YOUR_PUBLISHED_URL_HERE'; // Your Google Apps Script URL
+    const url = 'https://script.google.com/macros/s/AKfycbzhZFL9S3ubFnsOsI1gHFDJ5A_l9bzGmOVHV-RM_NomsOFbOig81WDeGVjkTpZtQGMk8A/exec'; // Your Google Apps Script URL
     const data = await fetchJSON(url);
     if (!data) return;
 
