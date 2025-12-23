@@ -43,8 +43,12 @@ window.POG_PAGE = {
     this.players = data.players;
 
     this.tbody = document.querySelector('#attendance-table tbody');
-    this.renderTable(this.players);
+    if (!this.tbody) {
+      console.error("Table tbody not found!");
+      return;
+    }
 
+    this.renderTable(this.players);
     this.addSearch();
     this.addSorting();
   },
@@ -93,6 +97,3 @@ window.POG_PAGE = {
     });
   }
 };
-
-// Run init when page is loaded
-window.addEventListener('DOMContentLoaded', () => window.POG_PAGE.init());
