@@ -1,14 +1,15 @@
-// Loader for footer and theme
-document.addEventListener("DOMContentLoaded", () => {
-  // Footer
-  const footer = document.getElementById("footer-container");
-  if (footer) {
-    fetch("components/footer.html")
-      .then(r => r.text())
-      .then(html => footer.innerHTML = html)
-      .catch(err => console.error("Footer load failed:", err));
-  }
+// loader.js
+import { loadComponent } from './utils.js';
+import { initTheme } from './theme.js';
 
-  // Initialize theme if you have theme.js functions
-  if (typeof initTheme === "function") initTheme();
+document.addEventListener('DOMContentLoaded', async () => {
+  // Load nav first
+  await loadComponent('nav-container', 'components/nav.html');
+  
+  // Now the table can safely load
+  initTheme();
+  window.POG_PAGE.init();
+
+  // Load footer
+  await loadComponent('footer-container', 'components/footer.html');
 });
