@@ -1,14 +1,11 @@
-// Load Nav & Footer
-function loadComponent(containerId, url) {
-  return fetch(url)
+function loadFooter() {
+  const footerContainer = document.getElementById('footer-container');
+  if (!footerContainer) return;
+
+  fetch('components/footer.html')
     .then(r => r.text())
-    .then(html => {
-      document.getElementById(containerId).innerHTML = html;
-    })
-    .catch(err => console.error(`${containerId} load failed:`, err));
+    .then(html => footerContainer.innerHTML = html)
+    .catch(err => console.error('Footer load failed:', err));
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
-  await loadComponent('nav-container', 'components/nav.html');
-  await loadComponent('footer-container', 'components/footer.html');
-});
+window.addEventListener('DOMContentLoaded', loadFooter);
