@@ -5,31 +5,30 @@
   <title>POG Attendance</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Theme + layout CSS -->
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/layout.css">
   <link rel="stylesheet" href="assets/css/theme.css">
 
   <style>
     body {
-      background-color: #18121E; /* DarkBlue */
-      color: #FF533D; /* Off White default */
+      background-color: #18121E; /* Dark Blue */
+      color: #FFFFFF; /* Main text white */
       font-family: "Inter", sans-serif;
     }
 
     main h1 {
-      color: #FF533D;
+      color: #FFFFFF;
       margin-bottom: 0.5rem;
     }
 
-    /* Attendance Table */
+    /* Table styling */
     #attendance-table {
       width: 100%;
       border-collapse: collapse;
       table-layout: fixed;
-      font-size: 0.7rem;
+      font-size: 0.7rem; /* 30% smaller */
       margin-top: 1rem;
-      color: #FF533D;
+      color: #FFFFFF;
     }
 
     #attendance-table th, #attendance-table td {
@@ -37,23 +36,29 @@
       border: 1px solid #444;
       text-align: center;
       word-wrap: break-word;
-      color: #FF533D;
+      color: #FFFFFF;
     }
 
     #attendance-table thead th {
-      background-color: #984B43; /* Rust Red */
-      color: #FF533D; /* Off-white */
+      background-color: #233237; /* GunMetal Dark Green */
+      color: #FFFFFF; /* White text */
       position: sticky;
       top: 0;
       z-index: 2;
     }
 
     #attendance-table tbody tr:nth-child(even) {
-      background-color: #233237; /* GunMetal DarkGreen */
+      background-color: #233237; /* GunMetal Dark Green */
     }
 
     #attendance-table tbody tr:nth-child(odd) {
-      background-color: #18121E; /* DarkBlue */
+      background-color: #18121E; /* Dark Blue */
+    }
+
+    th.sortable:hover {
+      cursor: pointer;
+      background-color: #984B43; /* Rust Red for hover */
+      color: #FFFFFF;
     }
 
     #search {
@@ -62,16 +67,10 @@
       padding: 0.5rem;
       width: 100%;
       max-width: 300px;
-      background: #233237;
-      color: #FF533D;
+      background: #233237; /* GunMetal */
+      color: #FFFFFF;
       border: 1px solid #444;
       border-radius: 4px;
-    }
-
-    th.sortable:hover {
-      cursor: pointer;
-      background-color: #FF533D;
-      color: #18121E;
     }
   </style>
 </head>
@@ -98,14 +97,15 @@
         </tr>
       </thead>
       <tbody>
-        <!-- JS will populate -->
+        <!-- JS populates rows -->
       </tbody>
     </table>
   </main>
 
   <div id="footer-container"></div>
 
+  <!-- Loader + Attendance -->
   <script src="assets/js/loader.js"></script>
-  <script src="assets/js/attendance.js" defer></script>
+  <script src="assets/js/attendance.js"></script>
 </body>
 </html>
