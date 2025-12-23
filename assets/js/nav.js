@@ -1,5 +1,3 @@
-// assets/js/nav.js
-
 export function initNav() {
   const current = location.pathname.split('/').pop() || 'index.html';
 
