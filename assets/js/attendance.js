@@ -1,23 +1,34 @@
+// Simple fetch helper
+async function fetchJSON(url) {
+  const res = await fetch(url);
+  return await res.json();
+}
+
+// Sorting helper
+function sortByKey(array, key, ascending = true) {
+  return array.sort((a, b) => {
+    let valA = a[key], valB = b[key];
+    if (typeof valA === 'string') valA = valA.toLowerCase();
+    if (typeof valB === 'string') valB = valB.toLowerCase();
+    if (valA < valB) return ascending ? -1 : 1;
+    if (valA > valB) return ascending ? 1 : -1;
+    return 0;
+  });
+}
+
 window.POG_PAGE = {
+  players: [],
+  currentSort: { key: null, ascending: true },
+
   async init() {
-    console.log("Attendance init started");
-
-    // Wait for table to exist
-    const tbody = document.querySelector('#attendance-table tbody');
-    if (!tbody) {
-      console.error("Attendance table tbody not found!");
-      return;
-    }
-    this.tbody = tbody;
-
-    const url = 'https://script.google.com/macros/s/AKfycbzhZFL9S3ubFnsOsI1gHFDJ5A_l9bzGmOVHV-RM_NomsOFbOig81WDeGVjkTpZtQGMk8A/exec';
+    const url = 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec'; // <-- Replace with your Google Sheets Web App URL
     console.log("Fetching attendance data from:", url);
 
     let data;
     try {
-      data = await fetch(url).then(r => r.json());
+      data = await fetchJSON(url);
     } catch (err) {
-      console.error("Failed to fetch attendance data:", err);
+      console.error("Failed to fetch data:", err);
       return;
     }
 
@@ -29,7 +40,11 @@ window.POG_PAGE = {
     console.log("Players received:", data.players.length);
     this.players = data.players;
 
+    this.tbody = document.querySelector('#attendance-table tbody');
     this.renderTable(this.players);
+
+    this.addSearch();
+    this.addSorting();
   },
 
   renderTable(players) {
@@ -47,5 +62,34 @@ window.POG_PAGE = {
         <td>${p.inactive ? "⚠️ INACTIVE" : ""}</td>
       </tr>
     `).join('');
+  },
+
+  addSearch() {
+    const search = document.getElementById('search');
+    search.addEventListener('input', e => {
+      const val = e.target.value.toLowerCase();
+      const filtered = this.players.filter(p => p.account.toLowerCase().includes(val));
+      this.renderTable(filtered);
+    });
+  },
+
+  addSorting() {
+    const headers = document.querySelectorAll('#attendance-table th.sortable');
+    headers.forEach(th => {
+      th.addEventListener('click', () => {
+        const key = th.dataset.key;
+        let ascending = true;
+
+        if (this.currentSort.key === key) {
+          ascending = !this.currentSort.ascending;
+        }
+
+        this.players = sortByKey(this.players, key, ascending);
+        this.currentSort = { key, ascending };
+        this.renderTable(this.players);
+      });
+    });
   }
 };
+
+window.addEventListener('DOMContentLoaded', () => window.POG_PAGE.init());
