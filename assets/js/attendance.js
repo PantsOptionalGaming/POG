@@ -39,8 +39,12 @@ window.POG_PAGE = {
     this.players = data.players;
 
     this.tbody = document.querySelector('#attendance-table tbody');
-    this.renderTable(this.players);
+    if (!this.tbody) {
+      console.error("Attendance table tbody not found!");
+      return;
+    }
 
+    this.renderTable(this.players);
     this.addSearch();
     this.addSorting();
   },
@@ -77,11 +81,9 @@ window.POG_PAGE = {
       th.addEventListener('click', () => {
         const key = th.dataset.key;
         let ascending = true;
-
         if (this.currentSort.key === key) {
           ascending = !this.currentSort.ascending;
         }
-
         this.players = sortByKey(this.players, key, ascending);
         this.currentSort = { key, ascending };
         this.renderTable(this.players);
@@ -89,5 +91,3 @@ window.POG_PAGE = {
     });
   }
 };
-
-window.addEventListener('DOMContentLoaded', () => window.POG_PAGE.init());
