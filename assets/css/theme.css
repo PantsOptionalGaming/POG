@@ -1,2 +1,31 @@
 :root{--bg-main:#fff;--bg-accent:#eaeaea;--text-main:#111;--highlight-tertiary:#FF533D}
 [data-theme='dark']{--bg-main:#18121E;--bg-accent:#233237;--text-main:#f5f5f5}
+
+/* NAV / HEADER THEME */
+#nav-container nav {
+  background-color: var(--bg-main);   /* DarkBlue for dark theme */
+  color: var(--highlight-tertiary);   /* Off-white highlight text */
+  padding: 0.5rem 1rem;
+}
+
+#nav-container nav a {
+  color: var(--highlight-tertiary);
+  text-decoration: none;
+  margin-right: 1rem;
+}
+
+#nav-container nav a.active {
+  color: var(--text-main); /* white in dark theme */
+  font-weight: bold;
+}
+
+#nav-container nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+#nav-container nav li {
+  margin-right: 1rem;
+}
