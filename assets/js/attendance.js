@@ -1,14 +1,12 @@
 // assets/js/attendance.js
 
-// Replace with your deployed Google Sheets Web App URL
-const SHEETS_URL = "https://script.google.com/macros/s/AKfycbzhZFL9S3ubFnsOsI1gHFDJ5A_l9bzGmOVHV-RM_NomsOFbOig81WDeGVjkTpZtQGMk8A/exec";
+const SHEETS_URL = "GOOGLE_SHEETS_WEB_APP_URL_HERE"; // Replace with your Web App URL
 
 async function fetchJSON(url) {
   const res = await fetch(url);
   return await res.json();
 }
 
-// Simple sorting
 function sortByKey(array, key, ascending = true) {
   return array.sort((a, b) => {
     let valA = a[key], valB = b[key];
@@ -26,20 +24,18 @@ window.POG_PAGE = {
   tbody: null,
 
   async init() {
-    let data;
     try {
-      data = await fetchJSON(SHEETS_URL);
+      const data = await fetchJSON(SHEETS_URL);
       if (!data.players) throw new Error("No players returned");
+
+      this.players = data.players;
+      this.tbody = document.querySelector("#attendance-table tbody");
+      this.renderTable(this.players);
+      this.addSearch();
+      this.addSorting();
     } catch (err) {
       console.error("Failed to fetch data:", err);
-      return;
     }
-
-    this.players = data.players;
-    this.tbody = document.querySelector("#attendance-table tbody");
-    this.renderTable(this.players);
-    this.addSearch();
-    this.addSorting();
   },
 
   renderTable(players) {
