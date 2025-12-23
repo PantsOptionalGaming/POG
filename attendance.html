@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>POG Attendance</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -10,15 +10,65 @@
   <link rel="stylesheet" href="assets/css/theme.css">
 
   <style>
-    body { background-color: #18121E; color: #FFFFFF; font-family: "Inter", sans-serif; margin: 0; padding: 0; }
-    main h1 { color: #FFFFFF; margin-top: 1rem; }
-    #attendance-table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.7rem; table-layout: fixed; }
-    #attendance-table th, #attendance-table td { padding: 0.3rem 0.5rem; border: 1px solid #444; text-align: center; word-wrap: break-word; color: #FF533D; }
-    #attendance-table thead th { background-color: #984B43; color: #FF533D; position: sticky; top: 0; z-index: 2; }
-    #attendance-table tbody tr:nth-child(even) { background-color: #233237; }
-    #attendance-table tbody tr:nth-child(odd) { background-color: #18121E; }
-    #search { margin-top: 1rem; margin-bottom: 0.5rem; padding: 0.5rem; width: 100%; max-width: 300px; background: #233237; color: #FF533D; border: 1px solid #444; border-radius: 4px; }
-    th.sortable:hover { cursor: pointer; background-color: #FF533D; }
+    body {
+      background-color: #18121E; /* Dark Blue base */
+      color: #FFFFFF;
+      font-family: "Inter", sans-serif;
+    }
+
+    main h1 {
+      color: #FFFFFF;
+    }
+
+    #attendance-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-size: 0.7rem; /* smaller font */
+      table-layout: fixed;
+      color: #FFFFFF;
+    }
+
+    #attendance-table th, #attendance-table td {
+      padding: 0.3rem 0.5rem;
+      border: 1px solid #444;
+      text-align: center;
+      word-wrap: break-word;
+      color: #FFFFFF;
+    }
+
+    #attendance-table thead th {
+      background-color: #984B43; /* Rust Red */
+      color: #FF533D; /* Off-white */
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+
+    #attendance-table tbody tr:nth-child(even) {
+      background-color: #233237; /* GunMetal DarkGreen */
+    }
+
+    #attendance-table tbody tr:nth-child(odd) {
+      background-color: #18121E; /* Dark Blue */
+    }
+
+    #search {
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      padding: 0.5rem;
+      width: 100%;
+      max-width: 300px;
+      background: #233237;
+      color: #FFFFFF;
+      border: 1px solid #444;
+      border-radius: 4px;
+    }
+
+    th.sortable:hover {
+      cursor: pointer;
+      background-color: #FF533D;
+    }
   </style>
 </head>
 <body>
@@ -26,7 +76,7 @@
 
   <main class="container">
     <h1>Attendance</h1>
-    <input type="text" id="search" placeholder="Search by account name...">
+    <input type="text" id="search" placeholder="Search by account name..." />
     <table id="attendance-table">
       <thead>
         <tr>
@@ -48,7 +98,8 @@
 
   <div id="footer-container"></div>
 
-  <script src="assets/js/attendance.js"></script>
+  <script src="assets/js/nav.js"></script>
   <script src="assets/js/loader.js"></script>
+  <script src="assets/js/attendance.js"></script>
 </body>
 </html>
