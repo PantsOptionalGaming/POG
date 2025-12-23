@@ -1,8 +1,10 @@
+// Simple fetch helper
 async function fetchJSON(url) {
   const res = await fetch(url);
   return await res.json();
 }
 
+// Sorting helper
 function sortByKey(array, key, ascending = true) {
   return array.sort((a, b) => {
     let valA = a[key], valB = b[key];
@@ -19,7 +21,7 @@ window.POG_PAGE = {
   currentSort: { key: null, ascending: true },
 
   async init() {
-    const url = 'https://script.google.com/macros/s/AKfycbzhZFL9S3ubFnsOsI1gHFDJ5A_l9bzGmOVHV-RM_NomsOFbOig81WDeGVjkTpZtQGMk8A/exec';
+    const url = 'YOUR_GOOGLE_SHEET_WEB_APP_URL_HERE';
     console.log("Fetching attendance data from:", url);
 
     let data;
@@ -39,12 +41,8 @@ window.POG_PAGE = {
     this.players = data.players;
 
     this.tbody = document.querySelector('#attendance-table tbody');
-    if (!this.tbody) {
-      console.error("Attendance table tbody not found!");
-      return;
-    }
-
     this.renderTable(this.players);
+
     this.addSearch();
     this.addSorting();
   },
@@ -81,9 +79,7 @@ window.POG_PAGE = {
       th.addEventListener('click', () => {
         const key = th.dataset.key;
         let ascending = true;
-        if (this.currentSort.key === key) {
-          ascending = !this.currentSort.ascending;
-        }
+        if (this.currentSort.key === key) ascending = !this.currentSort.ascending;
         this.players = sortByKey(this.players, key, ascending);
         this.currentSort = { key, ascending };
         this.renderTable(this.players);
@@ -91,3 +87,5 @@ window.POG_PAGE = {
     });
   }
 };
+
+window.addEventListener('DOMContentLoaded', () => window.POG_PAGE.init());
