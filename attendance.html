@@ -11,8 +11,8 @@
 
   <style>
     body {
-      background-color: #18121E; /* Dark Blue base */
-      color: #FFFFFF; /* Default text white */
+      background-color: #18121E;
+      color: #FFFFFF;
       font-family: "Inter", sans-serif;
       margin: 0;
       padding: 0;
@@ -23,7 +23,6 @@
       margin-top: 1rem;
     }
 
-    /* Attendance Table Styling */
     #attendance-table {
       width: 100%;
       border-collapse: collapse;
@@ -41,7 +40,7 @@
     }
 
     #attendance-table thead th {
-      background-color: #984B43; /* Rust Red header */
+      background-color: #984B43;
       color: #FF533D;
       position: sticky;
       top: 0;
@@ -49,11 +48,11 @@
     }
 
     #attendance-table tbody tr:nth-child(even) {
-      background-color: #233237; /* GunMetal DarkGreen */
+      background-color: #233237;
     }
 
     #attendance-table tbody tr:nth-child(odd) {
-      background-color: #18121E; /* Dark Blue */
+      background-color: #18121E;
     }
 
     #search {
@@ -70,7 +69,7 @@
 
     th.sortable:hover {
       cursor: pointer;
-      background-color: #FF533D; /* hover highlight */
+      background-color: #FF533D;
     }
 
     @media (max-width: 600px) {
@@ -85,35 +84,4 @@
   </style>
 </head>
 <body>
-  <div id="nav-container"></div>
-
-  <main class="container">
-    <h1>Attendance</h1>
-
-    <input type="text" id="search" placeholder="Search by account name...">
-
-    <table id="attendance-table">
-      <thead>
-        <tr>
-          <th class="sortable" data-key="account">Account</th>
-          <th class="sortable" data-key="rank">Rank</th>
-          <th class="sortable" data-key="totalXP">Total XP</th>
-          <th class="sortable" data-key="quarterXP">XP This Quarter</th>
-          <th class="sortable" data-key="attendancePct">Attendance %</th>
-          <th class="sortable" data-key="streak">Current Streak</th>
-          <th class="sortable" data-key="misses">Consecutive Misses</th>
-          <th class="sortable" data-key="lastRaid">Last Raid</th>
-          <th class="sortable" data-key="status">Status</th>
-          <th class="sortable" data-key="inactive">Inactivity Warning</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </main>
-
-  <div id="footer-container"></div>
-
-  <script src="assets/js/loader.js"></script>
-  <script src="assets/js/attendance.js"></script>
-</body>
-</html>
+  <di
