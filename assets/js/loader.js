@@ -1,5 +1,4 @@
 // assets/js/loader.js
-
 import { loadComponent } from './utils.js';
 import { initTheme } from './theme.js';
 import { initNav } from './nav.js';
