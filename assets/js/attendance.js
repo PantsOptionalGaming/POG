@@ -1,12 +1,10 @@
 // assets/js/attendance.js
 
-// Simple fetch helper
 async function fetchJSON(url) {
   const res = await fetch(url);
   return await res.json();
 }
 
-// Sorting helper
 function sortByKey(array, key, ascending = true) {
   return array.sort((a, b) => {
     let valA = a[key], valB = b[key];
@@ -24,7 +22,6 @@ window.POG_PAGE = {
 
   async init() {
     const url = 'https://script.google.com/macros/s/AKfycbzhZFL9S3ubFnsOsI1gHFDJ5A_l9bzGmOVHV-RM_NomsOFbOig81WDeGVjkTpZtQGMk8A/exec';
-    console.log("Fetching attendance data from:", url);
 
     let data;
     try {
@@ -34,17 +31,12 @@ window.POG_PAGE = {
       return;
     }
 
-    if (!data || !data.players) {
-      console.warn("No players data returned");
-      return;
-    }
+    if (!data || !data.players) return;
 
-    console.log("Players received:", data.players.length);
     this.players = data.players;
-
     this.tbody = document.querySelector('#attendance-table tbody');
-    this.renderTable(this.players);
 
+    this.renderTable(this.players);
     this.addSearch();
     this.addSorting();
   },
@@ -70,29 +62,25 @@ window.POG_PAGE = {
     const search = document.getElementById('search');
     search.addEventListener('input', e => {
       const val = e.target.value.toLowerCase();
-      const filtered = this.players.filter(p => p.account.toLowerCase().includes(val));
-      this.renderTable(filtered);
+      this.renderTable(
+        this.players.filter(p => p.account.toLowerCase().includes(val))
+      );
     });
   },
 
   addSorting() {
-    const headers = document.querySelectorAll('#attendance-table th.sortable');
-    headers.forEach(th => {
-      th.addEventListener('click', () => {
-        const key = th.dataset.key;
-        let ascending = true;
+    document.querySelectorAll('#attendance-table th.sortable')
+      .forEach(th => {
+        th.addEventListener('click', () => {
+          const key = th.dataset.key;
+          const ascending = this.currentSort.key === key
+            ? !this.currentSort.ascending
+            : true;
 
-        if (this.currentSort.key === key) {
-          ascending = !this.currentSort.ascending;
-        }
-
-        this.players = sortByKey(this.players, key, ascending);
-        this.currentSort = { key, ascending };
-        this.renderTable(this.players);
+          this.currentSort = { key, ascending };
+          this.players = sortByKey(this.players, key, ascending);
+          this.renderTable(this.players);
+        });
       });
-    });
   }
 };
-
-// Run init when page is loaded
-window.addEventListener('DOMContentLoaded', () => window.POG_PAGE.init());
