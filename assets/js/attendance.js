@@ -1,10 +1,8 @@
-// Simple fetch helper
 async function fetchJSON(url) {
   const res = await fetch(url);
   return await res.json();
 }
 
-// Sorting helper
 function sortByKey(array, key, ascending = true) {
   return array.sort((a, b) => {
     let valA = a[key], valB = b[key];
@@ -21,7 +19,7 @@ window.POG_PAGE = {
   currentSort: { key: null, ascending: true },
 
   async init() {
-    const url = 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec'; // <-- Replace with your Google Sheets Web App URL
+    const url = 'https://script.google.com/macros/s/AKfycbzhZFL9S3ubFnsOsI1gHFDJ5A_l9bzGmOVHV-RM_NomsOFbOig81WDeGVjkTpZtQGMk8A/exec';
     console.log("Fetching attendance data from:", url);
 
     let data;
