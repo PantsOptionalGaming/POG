@@ -1,6 +1,6 @@
 // assets/js/attendance.js
 
-const SHEETS_URL = "GOOGLE_SHEETS_WEB_APP_URL_HERE"; // Replace with your Web App URL
+const SHEETS_URL = "YOUR_GOOGLE_SHEET_WEB_APP_URL"; // Replace this
 
 async function fetchJSON(url) {
   const res = await fetch(url);
@@ -10,8 +10,8 @@ async function fetchJSON(url) {
 function sortByKey(array, key, ascending = true) {
   return array.sort((a, b) => {
     let valA = a[key], valB = b[key];
-    if (typeof valA === 'string') valA = valA.toLowerCase();
-    if (typeof valB === 'string') valB = valB.toLowerCase();
+    if (typeof valA === "string") valA = valA.toLowerCase();
+    if (typeof valB === "string") valB = valB.toLowerCase();
     if (valA < valB) return ascending ? -1 : 1;
     if (valA > valB) return ascending ? 1 : -1;
     return 0;
