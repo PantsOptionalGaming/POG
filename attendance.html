@@ -12,7 +12,7 @@
   <style>
     body {
       background-color: #18121E; /* Dark Blue */
-      color: #FFFFFF; /* Main text white */
+      color: #FFFFFF;
       font-family: "Inter", sans-serif;
     }
 
@@ -26,9 +26,8 @@
       width: 100%;
       border-collapse: collapse;
       table-layout: fixed;
-      font-size: 0.7rem; /* 30% smaller */
+      font-size: 0.7rem; /* ~30% smaller */
       margin-top: 1rem;
-      color: #FFFFFF;
     }
 
     #attendance-table th, #attendance-table td {
@@ -36,12 +35,12 @@
       border: 1px solid #444;
       text-align: center;
       word-wrap: break-word;
-      color: #FFFFFF;
+      color: #FFFFFF; /* default text white */
     }
 
     #attendance-table thead th {
       background-color: #233237; /* GunMetal Dark Green */
-      color: #FFFFFF; /* White text */
+      color: #FFFFFF;
       position: sticky;
       top: 0;
       z-index: 2;
@@ -57,7 +56,7 @@
 
     th.sortable:hover {
       cursor: pointer;
-      background-color: #984B43; /* Rust Red for hover */
+      background-color: #984B43; /* Rust Red */
       color: #FFFFFF;
     }
 
@@ -67,10 +66,20 @@
       padding: 0.5rem;
       width: 100%;
       max-width: 300px;
-      background: #233237; /* GunMetal */
+      background: #233237;
       color: #FFFFFF;
       border: 1px solid #444;
       border-radius: 4px;
+    }
+
+    /* Highlight negative XP in red */
+    .xp-negative {
+      color: #FF533D; /* Off White Redish accent for negative */
+    }
+
+    /* Highlight inactive */
+    .inactive-warning {
+      color: #FF533D;
     }
   </style>
 </head>
@@ -96,15 +105,12 @@
           <th class="sortable" data-key="inactive">Inactivity Warning</th>
         </tr>
       </thead>
-      <tbody>
-        <!-- JS populates rows -->
-      </tbody>
+      <tbody></tbody>
     </table>
   </main>
 
   <div id="footer-container"></div>
 
-  <!-- Loader + Attendance -->
   <script src="assets/js/loader.js"></script>
   <script src="assets/js/attendance.js"></script>
 </body>
