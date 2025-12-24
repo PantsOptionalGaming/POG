@@ -43,14 +43,14 @@ window.POG_PAGE = {
       <tr>
         <td>${p.account}</td>
         <td>${p.rank}</td>
-        <td>${p.totalXP}</td>
-        <td>${p.quarterXP}</td>
+        <td class="${p.totalXP < 0 ? 'xp-negative' : ''}">${p.totalXP}</td>
+        <td class="${p.quarterXP < 0 ? 'xp-negative' : ''}">${p.quarterXP}</td>
         <td>${p.attendancePct.toFixed(2)}%</td>
         <td>${p.streak}</td>
         <td>${p.misses}</td>
         <td>${p.lastRaid}</td>
         <td>${p.status}</td>
-        <td>${p.inactive ? "⚠️ INACTIVE" : ""}</td>
+        <td class="${p.inactive ? 'inactive-warning' : ''}">${p.inactive ? "⚠️ INACTIVE" : ""}</td>
       </tr>
     `).join('');
   },
