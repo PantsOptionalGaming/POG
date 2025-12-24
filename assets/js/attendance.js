@@ -1,6 +1,6 @@
 // assets/js/attendance.js
 
-const SHEETS_URL = "YOUR_GOOGLE_SHEET_WEB_APP_URL"; // Replace this
+const SHEETS_URL = "https://script.google.com/macros/s/AKfycbzhZFL9S3ubFnsOsI1gHFDJ5A_l9bzGmOVHV-RM_NomsOFbOig81WDeGVjkTpZtQGMk8A/exec"; // Replace this
 
 async function fetchJSON(url) {
   const res = await fetch(url);
