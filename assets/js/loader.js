@@ -1,15 +1,11 @@
-// loader.js
-import { loadComponent } from './utils.js';
-import { initTheme } from './theme.js';
+function loadComponent(containerId, url) {
+  return fetch(url)
+    .then(res => res.text())
+    .then(html => document.getElementById(containerId).innerHTML = html)
+    .catch(err => console.error(`Failed to load ${url}:`, err));
+}
 
-document.addEventListener('DOMContentLoaded', async () => {
-  // Load nav first
-  await loadComponent('nav-container', 'components/nav.html');
-  
-  // Now the table can safely load
-  initTheme();
-  window.POG_PAGE.init();
-
-  // Load footer
-  await loadComponent('footer-container', 'components/footer.html');
+document.addEventListener("DOMContentLoaded", async () => {
+  await loadComponent("nav-container", "components/nav.html");
+  await loadComponent("footer-container", "components/footer.html");
 });
